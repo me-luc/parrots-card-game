@@ -14,11 +14,22 @@ function askNumber() {
 }
 
 function drawImg(number) {
-	const elemento = document.querySelector("ul");
-	for (let i = 0; i < number; i++) {
-		elemento.innerHTML += `
-            <li> Hello
-            </li>
+	//foi criado dois squares para melhor divisão das cartas
+	const square1 = document.querySelector(".square1");
+	const square2 = document.querySelector(".square2");
+
+	for (let i = 0; i < number / 2; i++) {
+		square1.innerHTML += `
+                <div class="bloco">
+                    AS
+                </div>
+        `;
+	}
+	for (let i = 0; i < number / 2; i++) {
+		square2.innerHTML += `
+                <div class="bloco">
+                    AS
+                </div>
         `;
 	}
 }
