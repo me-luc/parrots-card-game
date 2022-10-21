@@ -1,5 +1,3 @@
-askNumber();
-
 const cardImgs = [
 	`<img src="./images/bobrossparrot.gif" alt="" />"`,
 	`<img src="./images/explodyparrot.gif" alt="" />`,
@@ -10,15 +8,24 @@ const cardImgs = [
 	`<img src="./images/unicornparrot.gif" alt="" />`,
 ];
 
+askNumber();
+
 function askNumber() {
 	let number = prompt(
-		"Digite um número (somente números pares aceitos ex: 2, 4, 6):"
+		"Digite um número (somente números pares aceitos 2 - 14):"
 	);
-	while (number % 2 !== 0) {
+	while (number % 2 !== 0 || number > 14) {
 		alert("Digite apenas números pares!");
-		number = prompt(
-			"Digite um número (somente números pares aceitos ex: 2, 4, 6):"
-		);
+
+		if (number % 2 !== 0) {
+			number = prompt(
+				"Digite um número (somente números pares aceitos ex: 2, 4, 6):"
+			);
+		} else if (number > 14) {
+			number = prompt("Digite um número menor que 14:");
+		} else {
+			number = prompt("Digite um número menor ou igual a 14");
+		}
 	}
 	drawCard(number);
 }
@@ -28,22 +35,30 @@ function drawCard(number) {
 	const square1 = document.querySelector(".square1");
 	const square2 = document.querySelector(".square2");
 
-	const divPattern = `
-		<div class="card" onclick="flip(this)">
-			<div class="face front">
-				<img src="./images/unicornparrot.gif" alt="" />
+	let asignedCardNumber = [];
+	//criando um array com número das cartas
+	for (let i = 0; i < number / 2; i++) {
+		//adicionando duas vzs para adicionar duas cartas iguais
+		asignedCardNumber.push(i);
+		asignedCardNumber.push(i);
+	}
+	//embaralhando numeros
+	asignedCardNumber.sort(makeRandom);
+	alert(asignedCardNumber);
+	//criando cartas
+	for (let u = 0; u < number; u++) {
+		//atribuindo a carta a um numero
+		alert(cardImgs[asignedCardNumber[u]]);
+		square1.innerHTML += `
+		<div class="card" onclick="flip(this)" id="${asignedCardNumber[u]}">
+			<div class="face front" >
+				${cardImgs[asignedCardNumber[u]]}
 			</div>
 			<div class="face back">
 				<img src="./images/back.png" alt="" />
 			</div>
 		</div>
 	`;
-
-	for (let i = 0; i < number / 2; i++) {
-		square1.innerHTML += divPattern;
-	}
-	for (let i = 0; i < number / 2; i++) {
-		square2.innerHTML += divPattern;
 	}
 }
 
@@ -55,4 +70,8 @@ function flip(elemento) {
 		elemento.classList.add("flip");
 		setTimeout(flip, 2000, elemento);
 	}
+}
+
+function makeRandom() {
+	return Math.random() - 0.5;
 }

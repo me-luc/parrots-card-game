@@ -50,8 +50,8 @@ li {
 	background-color: #99cea8;
 }
 .face img {
-	width: 100px;
-	height: 100px;
+	width: 100%;
+	height: auto;
 }
 .front {
 	transform: rotateY(180deg);
