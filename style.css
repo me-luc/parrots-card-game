@@ -26,7 +26,7 @@ li {
 }
 
 .container {
-	width: 85%;
+	background-color: aqua;
 }
 
 .card {
@@ -43,7 +43,7 @@ li {
 	transform-style: preserve-3d;
 	border-radius: 5px;
 
-	margin: 5px;
+	margin: 15px;
 }
 
 .face {
@@ -98,12 +98,30 @@ li {
 		font-size: 36px;
 		line-height: 42px;
 	}
+	.card {
+		margin: 10px;
+	}
 	.container {
 		display: flex;
 		justify-content: space-evenly;
 	}
 	.square1,
 	.square2 {
+		height: 100%;
+		width: 100%;
 		display: block;
+		margin-bottom: 20px;
+	}
+}
+
+@media (max-width: 720px) and (min-width: 555px) {
+	body {
+		text-align: center;
+	}
+	.card {
+		margin: 5px;
+	}
+	.card img {
+		width: 100%;
 	}
 }
