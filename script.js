@@ -78,9 +78,6 @@ function drawCard(number) {
 }
 
 function flip(element) {
-	//contando jogada do usuário
-	moves++;
-
 	//variavel p/ verificar quantos elements virados no momento
 	let flipElements = document.querySelectorAll(".flip");
 
@@ -94,6 +91,9 @@ function flip(element) {
 
 	//checar se os dois elementos virados são iguais (possuem mesma id)
 	if (flipElements.length == 2) {
+		//contando jogada do usuário
+		moves += 2;
+
 		if (flipElements[0].id === flipElements[1].id) {
 			flipElements[0].classList.add("correct");
 			flipElements[1].classList.add("correct");
