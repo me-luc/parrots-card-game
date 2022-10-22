@@ -27,7 +27,6 @@ li {
 
 .container {
 	width: 85%;
-	background-color: blue;
 }
 
 .card {
@@ -52,22 +51,17 @@ li {
 	background-color: #99cea8;
 }
 .face img {
-	width: 100%;
-	height: auto;
+	width: 100px;
+	height: 100px;
 }
 .front {
 	transform: rotateY(180deg);
+	backface-visibility: hidden;
 }
 .back {
 	backface-visibility: hidden;
 }
 
-.square1 {
-	background-color: #75b79e;
-}
-.square2 {
-	background-color: yellow;
-}
 .flip {
 	transform: rotateY(180deg);
 }

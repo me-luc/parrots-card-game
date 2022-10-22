@@ -16,15 +16,17 @@ askNumber();
 
 function askNumber() {
 	let number = prompt(
-		"Digite um número (somente números pares aceitos 2 - 14):"
+		"Digite um número (somente números pares aceitos 4 - 14):"
 	);
-	while (number % 2 !== 0 || number > 14) {
+	while (number % 2 !== 0 || number > 14 || number < 4) {
 		alert("Digite apenas números pares!");
 
 		if (number % 2 !== 0) {
 			number = prompt(
 				"Digite um número (somente números pares aceitos ex: 2, 4, 6):"
 			);
+		} else if (number < 4) {
+			number = prompt("Digite um número maior que 4:");
 		} else if (number > 14) {
 			number = prompt("Digite um número menor que 14:");
 		} else {
@@ -76,24 +78,19 @@ function drawCard(number) {
 }
 
 function flip(element) {
+	//contando jogada do usuário
+	moves++;
+
 	//variavel p/ verificar quantos elements virados no momento
 	let flipElements = document.querySelectorAll(".flip");
 
-	//se não tiver virado, add flip caso contrario remove
-	if (element.classList.contains("flip")) {
-		removeFlip(element);
-	} else if (flipElements.length < 2) {
-		//verificando se possui já dois elements virado
+	//verificando se possui já dois elements virado
+	if (flipElements.length < 2) {
 		element.classList.add("flip");
-
-		//atualizando numero apos novo clique, se for dois, não executa nada
-		flipElements = document.querySelectorAll(".flip");
-		if (!flipElements == 2) {
-			setTimeout(removeFlip, 2000, element);
-		}
-
-		setTimeout(removeFlip, 2000, element);
 	}
+
+	//atualizando numero apos novo clique, se for dois, não executa nada
+	flipElements = document.querySelectorAll(".flip");
 
 	//checar se os dois elementos virados são iguais (possuem mesma id)
 	if (flipElements.length == 2) {
@@ -103,7 +100,8 @@ function flip(element) {
 			flipElements[0].classList.remove("flip");
 			flipElements[1].classList.remove("flip");
 		} else {
-			setTimeout(removeFlip, 2000, element);
+			setTimeout(removeFlip, 1000, flipElements[0]);
+			setTimeout(removeFlip, 1000, flipElements[1]);
 		}
 	}
 
@@ -113,9 +111,6 @@ function flip(element) {
 		clearInterval(id);
 		setTimeout(showWinMessage, 1000, moves);
 	}
-
-	//contando jogada do usuário
-	moves++;
 }
 
 function showWinMessage(moves) {
