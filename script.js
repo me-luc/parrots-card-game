@@ -10,7 +10,6 @@ const cardImgs = [
 
 let moves = 0;
 let numberCards = 0;
-let id;
 
 askNumber();
 
