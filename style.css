@@ -8,6 +8,8 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+
+	position: relative;
 }
 
 h1 {
@@ -75,6 +77,21 @@ li {
 }
 .square1,
 .square2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.counter {
+	width: 100px;
+	height: 30px;
+	background-color: tomato;
+	color: white;
+
+	position: absolute;
+	right: 0;
+	top: 0;
+
 	display: flex;
 	justify-content: center;
 	align-items: center;

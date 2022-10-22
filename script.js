@@ -10,6 +10,7 @@ const cardImgs = [
 
 let moves = 0;
 let numberCards = 0;
+let id;
 
 askNumber();
 
@@ -76,7 +77,7 @@ function drawCard(number) {
 
 function flip(element) {
 	//variavel p/ verificar quantos elements virados no momento
-	const flipElements = document.querySelectorAll(".flip");
+	let flipElements = document.querySelectorAll(".flip");
 
 	//se não tiver virado, add flip caso contrario remove
 	if (element.classList.contains("flip")) {
@@ -84,7 +85,14 @@ function flip(element) {
 	} else if (flipElements.length < 2) {
 		//verificando se possui já dois elements virado
 		element.classList.add("flip");
-		setTimeout(flip, 2000, element);
+
+		//atualizando numero apos novo clique, se for dois, não executa nada
+		flipElements = document.querySelectorAll(".flip");
+		if (!flipElements == 2) {
+			setTimeout(removeFlip, 2000, element);
+		}
+
+		setTimeout(removeFlip, 2000, element);
 	}
 
 	//checar se os dois elementos virados são iguais (possuem mesma id)
@@ -92,19 +100,26 @@ function flip(element) {
 		if (flipElements[0].id === flipElements[1].id) {
 			flipElements[0].classList.add("correct");
 			flipElements[1].classList.add("correct");
+			flipElements[0].classList.remove("flip");
+			flipElements[1].classList.remove("flip");
+		} else {
+			setTimeout(removeFlip, 2000, element);
 		}
 	}
 
 	//checar se todas cartas estão viradas (finalizar jogo)
 	const correctArr = document.querySelectorAll(".correct");
-	if (correctArr.length === numberCards) {
-		alert(`Você ganhou em ${moves} jogadas!`);
+	if (correctArr.length == numberCards) {
+		clearInterval(id);
+		setTimeout(showWinMessage, 1000, moves);
 	}
-	alert(correctArr.length === numberCards);
-	alert(`number - ${numberCards} moves - ${moves}`);
 
 	//contando jogada do usuário
 	moves++;
+}
+
+function showWinMessage(moves) {
+	alert(`Você ganhou em ${moves} jogadas!`);
 }
 
 function removeFlip(element) {
@@ -117,8 +132,11 @@ function makeRandom() {
 
 //função para formatar tempo em seg p/ 00:00
 function formatSecToMin(sec) {
-	let min = sec / 60;
-	sec = sec % 60;
-
-	return `${min.toFixed(2)}:${sec.toFixed(2)}`;
+	if (sec < 60) {
+		return `00:` + ("00" + sec).slice(-2);
+	} else {
+		let min = Math.floor(sec / 60);
+		let leftSec = sec - min * 60;
+		return `${("00" + min).slice(-2)}:${("00" + leftSec).slice(-2)}`;
+	}
 }
