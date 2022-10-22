@@ -69,6 +69,10 @@ li {
 .flip {
 	transform: rotateY(180deg);
 }
+.correct {
+	transform: rotateY(180deg);
+	transition: none;
+}
 .square1,
 .square2 {
 	display: flex;
