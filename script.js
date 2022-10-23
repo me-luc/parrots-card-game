@@ -107,7 +107,6 @@ function flip(element) {
 	//checar se todas cartas estão viradas (finalizar jogo)
 	const correctArr = document.querySelectorAll(".correct");
 	if (correctArr.length == numberCards) {
-		clearInterval(id);
 		setTimeout(showWinMessage, 1000, moves);
 	}
 }
